@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    <script>history.pushState({},null,'/login')</script>
 <head>
     <style>
         body {
@@ -32,7 +33,7 @@
         <h1>Welcome</h1>
     </div>
     <div class="cont">
-        <form method="POST">
+        <form method="post" action="/login">
             Username:<br>
             <input type="text" name="username">
             <br>
@@ -40,6 +41,7 @@
             <input type="password" name="password">
             <br><br>
             <input type="submit" value="Login">
+            <%= message %>
         </form>
         <br>
         <a href="registration">I dont have an account</a>

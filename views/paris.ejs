@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    <script>history.pushState({},null,'/paris')</script>
 <head>
     <style>
         body {
@@ -78,7 +79,12 @@
         It is known as the most romantic city in the world, and is home to some world famous sights that are constantly shown in travel magazines, movies, and other works of art. Paris, the capital of France, has a population of over two million people and is one of Europe's most-visited cities.
     </div>
     <div class="wanttogo">
-        <button id="wanttogo" class="btn btn-secondary ml-3">Add to Want-to-Go List</button>
+        <form method="post" action="/wanttogo/paris">
+            <button type="submit" id="wanttogo" class="btn btn-secondary ml-3">Add to Want-to-Go List</button>
+        </form>
+        <div class="text-white m-5">
+            <%= message %>
+        </div>
     </div>
     <div class="video">
         <video width="480" height="360" controls>

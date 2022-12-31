@@ -38,5 +38,15 @@
             </form>
         </div>
     </nav>
+    <ul>
+        <% for(let item of desinations){  %>
+            <li>
+                <a class="text-white h2" href="/<%= item %>">
+                    <%= item %>
+                </a>
+            </li>
+
+           <%} %>
+    </ul>
 </body>
 </html>

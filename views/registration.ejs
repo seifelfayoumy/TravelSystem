@@ -34,13 +34,16 @@
         <h1>Registration</h1>
     </div>
     <div class="cont">
-        <form method='post' action='/register'>
+        <form method='post' action='/registration'>
             Username: <br>
             <input type="text" id="user" name="username"> <br>
             Password: <br>
             <input type="password" id="password" name="password"> <br> <br>
             <input type="submit" id="simple_click" class="btn btn-secondary" value="Register"> <br>
+            <%= message %>
         </form>
+        <br>
+        <a href="/login">I already have an account</a>
     </div>
 </body>
 
