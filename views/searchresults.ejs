@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <style>
         body {
@@ -21,6 +22,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-2">
         <a class="navbar-brand" style="color: rgb(191, 255, 161)">Search Results</a>
@@ -38,15 +40,24 @@
             </form>
         </div>
     </nav>
-    <ul>
-        <% for(let item of desinations){  %>
-            <li>
-                <a class="text-white h2" href="/<%= item %>">
-                    <%= item %>
-                </a>
-            </li>
+    <% if (desinations.length==0) { %>
+        <div class="text-white h2">
+            Destination Not Found
+        </div>
+        <%} else { %>
+            <ul>
+                <% for(let item of desinations){ %>
+                    <li>
+                        <a class="text-white h2" href="/<%= item %>">
+                            <%= item %>
+                        </a>
+                    </li>
 
-           <%} %>
-    </ul>
+                    <%} %>
+            </ul>
+            <% } %>
+                <button onclick="location.href = '/home';" id="home" class="btn btn-secondary ml-3"> Back To Home
+                </button>
 </body>
+
 </html>

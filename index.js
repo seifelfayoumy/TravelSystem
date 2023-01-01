@@ -7,7 +7,8 @@ const app = new express();
 app.use(session({
   secret: 'my-secret-for-this-networks-project',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {}
 }))
 app.use(express.urlencoded({ extended: false }));
 
@@ -128,6 +129,15 @@ app.post('/search', async(req,res) => {
   })
 })
 
+app.post('/logout', async(req,res) => {
+  try{
+    req.session.username = null;
+    res.redirect('/');
+  }catch(e){
+    res.redirect('/');
+  }
+})
+
 app.get('/registration', async (req, res) => {
   res.render('registration', {
     message: ""
@@ -154,48 +164,85 @@ app.get('/home', (req,res) =>{
 app.get('/', (req, res) => {
   if(req.session.username){
     res.redirect('/home');
+  }else{
+    res.redirect('/registration');
   }
-  res.redirect('/registration');
 })
 
 app.get('/hiking', (req, res) => {
-  res.render('hiking');
+  if(req.session.username){
+    res.render('hiking');
+  }else{
+    res.redirect('/registration');
+  }
 })
 app.get('/cities', (req, res) => {
-  res.render('cities');
+  if(req.session.username){
+    res.render('cities');
+  }else{
+    res.redirect('/registration');
+  }
 })
 app.get('/islands', (req, res) => {
-  res.render('islands');
+  if(req.session.username){
+    res.render('islands');
+  }else{
+    res.redirect('/registration');
+  }
 })
 app.get('/inca', (req, res) => {
-  res.render('inca', {
-    message: ""
-  });
+  if(req.session.username){
+    res.render('inca', {
+      message: ""
+    });
+  }else{
+    res.redirect('/registration');
+  }
 })
 app.get('/annapurna', (req, res) => {
-  res.render('annapurna', {
-    message: ""
-  });
+  if(req.session.username){
+    res.render('annapurna', {
+      message: ""
+    });
+  }else{
+    res.redirect('/registration');
+  }
 })
 app.get('/paris', (req, res) => {
-  res.render('paris', {
-    message: ""
-  });
+  if(req.session.username){
+    res.render('paris', {
+      message: ""
+    });
+  }else{
+    res.redirect('/registration');
+  }
 })
 app.get('/rome', (req, res) => {
-  res.render('rome', {
-    message: ""
-  });
+  if(req.session.username){
+    res.render('rome', {
+      message: ""
+    });
+  }else{
+    res.redirect('/registration');
+  }
 })
 app.get('/bali', (req, res) => {
-  res.render('bali', {
-    message: ""
-  });
+  if(req.session.username){
+    res.render('bali', {
+      message: ""
+    });
+  }else{
+    res.redirect('/registration');
+  }
 })
 app.get('/santorini', (req, res) => {
-  res.render('santorini', {
-    message: ""
-  });
+  if(req.session.username){
+    res.render('santorini', {
+      message: ""
+    });
+  }else{
+    res.redirect('/registration');
+  }
 })
 app.get('/wanttogo', async (req, res) => {
   try{
@@ -207,7 +254,6 @@ app.get('/wanttogo', async (req, res) => {
   }catch(e){
     res.redirect('/');
   }
-
 })
 
 app.listen(3000, () => {

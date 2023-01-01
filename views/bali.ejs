@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    <script>history.pushState({},null,'/bali')</script>
+<script>history.pushState({}, null, '/bali')</script>
+
 <head>
     <style>
         body {
@@ -8,17 +9,20 @@
             background-repeat: no-repeat;
             background-size: 100%;
         }
+
         h1 {
             color: white;
             text-align: center;
             -webkit-text-stroke: 1px blue;
         }
+
         .container1 {
             position: fixed;
             left: 50px;
             top: 150px;
             color: white;
         }
+
         .container2 {
             position: fixed;
             left: 300px;
@@ -28,6 +32,7 @@
             text-align: justify;
             text-justify: inter-word;
         }
+
         .video {
             position: fixed;
             left: 700px;
@@ -37,11 +42,13 @@
             text-align: justify;
             text-justify: inter-word;
         }
+
         .wanttogo {
             position: fixed;
             left: 30px;
             top: 470px;
         }
+
         #my {
             zoom: 110%;
         }
@@ -75,7 +82,8 @@
         <img id="image" src="/bali.png" width="193" height="300">
     </div>
     <div class="container2">
-        Also known as the Land of the Gods, Bali appeals through its sheer natural beauty of looming volcanoes and lush terraced rice fields that exude peace and serenity. It is also famous for surfers' paradise.
+        Also known as the Land of the Gods, Bali appeals through its sheer natural beauty of looming volcanoes and lush
+        terraced rice fields that exude peace and serenity. It is also famous for surfers' paradise.
     </div>
     <div class="wanttogo">
         <form method="post" action="/wanttogo/bali">
@@ -86,11 +94,12 @@
         </div>
     </div>
     <div class="video">
-        <video width="480" height="360" controls>
-            <source src="/bali.mp4">
-        </video>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/BFS9n4B_2xA" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
     </div>
-
+    <button onclick="location.href = '/home';" id="home" class="btn btn-secondary ml-3"> Back To Home </button>
 </body>
 
 </html>
