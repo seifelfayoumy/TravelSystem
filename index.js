@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const { MongoClient } = require('mongodb');
 const path = require('path');
+require('dotenv').config();
 
 const app = new express();
 app.use(session({
@@ -14,9 +15,11 @@ app.use(express.urlencoded({ extended: false }));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
-app.use(express.static(path.join(__dirname, '/public')))
+app.use(express.static(path.join(__dirname, '/public')));
 
-const dbUrl = 'mongodb+srv://seif:mydatabasepassword@cluster0.s7gamqu.mongodb.net/?retryWrites=true&w=majority';
+const PORT = process.env.PORT || 3000;
+
+const dbUrl = process.env.DATABASE_URL;
 const client = new MongoClient(dbUrl);
 main();
 
@@ -118,22 +121,22 @@ app.post('/wanttogo/:destname', async (req, res) => {
   }
 })
 
-app.post('/search', async(req,res) => {
+app.post('/search', async (req, res) => {
   const search = req.body.Search;
   const desinations = ['annapurna', 'bali', 'inca', 'paris', 'rome', 'santorini'];
 
   const newDestinations = desinations.filter(d => d.includes(search));
 
-  res.render('searchresults',{
+  res.render('searchresults', {
     desinations: newDestinations
   })
 })
 
-app.post('/logout', async(req,res) => {
-  try{
+app.post('/logout', async (req, res) => {
+  try {
     req.session.username = null;
     res.redirect('/');
-  }catch(e){
+  } catch (e) {
     res.redirect('/');
   }
 })
@@ -144,120 +147,120 @@ app.get('/registration', async (req, res) => {
   });
 })
 
-app.get('/login', (req,res) =>{
+app.get('/login', (req, res) => {
   res.render('login', {
     message: ""
   })
 })
 
-app.get('/home', (req,res) =>{
-  if(req.session.username){
+app.get('/home', (req, res) => {
+  if (req.session.username) {
     res.render('home', {
       username: req.session.username
     })
-  }else{
+  } else {
     res.redirect('/registration')
   }
 
 })
 
 app.get('/', (req, res) => {
-  if(req.session.username){
+  if (req.session.username) {
     res.redirect('/home');
-  }else{
+  } else {
     res.redirect('/registration');
   }
 })
 
 app.get('/hiking', (req, res) => {
-  if(req.session.username){
+  if (req.session.username) {
     res.render('hiking');
-  }else{
+  } else {
     res.redirect('/registration');
   }
 })
 app.get('/cities', (req, res) => {
-  if(req.session.username){
+  if (req.session.username) {
     res.render('cities');
-  }else{
+  } else {
     res.redirect('/registration');
   }
 })
 app.get('/islands', (req, res) => {
-  if(req.session.username){
+  if (req.session.username) {
     res.render('islands');
-  }else{
+  } else {
     res.redirect('/registration');
   }
 })
 app.get('/inca', (req, res) => {
-  if(req.session.username){
+  if (req.session.username) {
     res.render('inca', {
       message: ""
     });
-  }else{
+  } else {
     res.redirect('/registration');
   }
 })
 app.get('/annapurna', (req, res) => {
-  if(req.session.username){
+  if (req.session.username) {
     res.render('annapurna', {
       message: ""
     });
-  }else{
+  } else {
     res.redirect('/registration');
   }
 })
 app.get('/paris', (req, res) => {
-  if(req.session.username){
+  if (req.session.username) {
     res.render('paris', {
       message: ""
     });
-  }else{
+  } else {
     res.redirect('/registration');
   }
 })
 app.get('/rome', (req, res) => {
-  if(req.session.username){
+  if (req.session.username) {
     res.render('rome', {
       message: ""
     });
-  }else{
+  } else {
     res.redirect('/registration');
   }
 })
 app.get('/bali', (req, res) => {
-  if(req.session.username){
+  if (req.session.username) {
     res.render('bali', {
       message: ""
     });
-  }else{
+  } else {
     res.redirect('/registration');
   }
 })
 app.get('/santorini', (req, res) => {
-  if(req.session.username){
+  if (req.session.username) {
     res.render('santorini', {
       message: ""
     });
-  }else{
+  } else {
     res.redirect('/registration');
   }
 })
 app.get('/wanttogo', async (req, res) => {
-  try{
+  try {
     const users = client.db().collection('users');
-    const user = await users.findOne({username: req.session.username});
+    const user = await users.findOne({ username: req.session.username });
     res.render('wanttogo', {
       desinations: user.wanttogo
     });
-  }catch(e){
+  } catch (e) {
     res.redirect('/');
   }
 })
 
-app.listen(3000, () => {
-  console.log('server is running on port 3000');
+app.listen(PORT, () => {
+  console.log('server is running on port ' + PORT);
 });
 
 async function main() {
